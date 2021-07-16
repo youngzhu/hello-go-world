@@ -1,2 +1,2 @@
 # hello-go-world
-初识Go
+Go 学习笔记
