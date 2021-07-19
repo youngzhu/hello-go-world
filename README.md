@@ -1,2 +1,2 @@
-# hello-go-world
-Go 学习笔记
+# Go 学习笔记
+Go学习从这里开始
