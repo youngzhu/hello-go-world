@@ -50,3 +50,124 @@ func Compute(value1 int, value2 float64) (result float64, err error) {
 
 // 行注释
 ```
+
+## ch02 顺序编程
+Go —— 更好的C语言
+
+### 变量申明
+```Go
+var 变量名 类型
+
+// 也可以将申明的变量放一起
+var (
+    v1 int
+    v2 string
+)
+```
+
+### 变量初始化
+```Go
+var v1 int = 10
+var v2 = 10
+v3 := 10 // := 操作符， 同时进行变量申明和初始化的工作
+// 以上三种写法效果是一样的
+
+/*
+需要注意的是 := 左侧的变量不能是已经被申明过的，否则会报编译错误
+例如
+*/
+var i int
+i := 2
+```
+
+### 变量赋值
+```Go
+var v10 int
+v10 = 123
+
+// 多重赋值
+// 在不支持多重赋值的语言中，交换两个变量
+t = i;
+i = j;
+j = t;
+
+// 而在Go中
+i, j = j, i
+```
+
+### 常量
+```Go
+// 可以限定类型，也可以不要
+const u, v float32 = 0, 3
+const a, b, c = 3, 4, "foo"
+```
+
+### 数组
+```Go
+// 数组申明
+[32] byte
+[3][5] int
+
+// 数组属于值传递，当作为一个参数传递到另一个函数里，传递的是个副本
+```
+
+### 数组切片
+创建数组切片的两种方式：
+1. 基于数组，见 `slice.go`
+2. 直接创建
+
+```Go
+// arr[first:last]
+selice = arr[:] // 所有元素创建切片
+selice = arr[:5] // 前5个元素创建切片
+selice = arr[5:] // 从第5个元素开始创建切片
+
+// 直接创建，内置函数make()
+// 创建一个初始元素个数为5的数组切片，元素初始值为0
+slice1 := make([]int, 5)
+// 创建一个初始元素个数为5的数组切片，元素初始值为0，并预留10个元素的存储空间
+slice2 := make([]int, 5, 10)
+// 直接创建并初始化包含5个元素的切片
+slice3 := []int{1, 2, 3, 4, 5}
+```
+
+切片的遍历
+```Go
+// 传统方法
+for i := 0; i < len(slice); i++ {
+    fmt.Println("slice[", i, "] = ", slice[i])
+}
+
+// range
+// range表达式有两个返回值，第一个是索引，第二个是元素值
+for i, v := range slice {
+    fmt.Println("slice[", i, "] = ", v)
+}
+```
+
+内置函数 `cap()` 和 `len()`，见 `slice2.go`
+cap: 返回切片分配的空间大小
+len: 返回当前所有存储的元素个数
+
+给切片新增元素：`append()`函数
+```Go
+// 直接增加元素
+mySlice = append(mySlice, 1, 2, 3)
+
+// 增加另一个切片中的元素
+mySlice2 := []int{8, 9, 10}
+// 必须有 ... ，否则编译错误
+mySlice = append(mySlice, mySlice2...)
+// 上两行等同于下一行
+mySlice = append(mySlice, 8, 9, 10)
+```
+
+基于切片数组创建切片数组
+```Go
+oldSlice := []int{1, 2, 3, 4, 5}
+newSlice := oldSlice[:3] // 基于oldSlice的前3个元素构建新的切片数组
+```
+
+内容复制
+内置函数`copy()`，见 `copy.go`
+
