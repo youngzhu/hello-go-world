@@ -171,3 +171,39 @@ newSlice := oldSlice[:3] // 基于oldSlice的前3个元素构建新的切片数�
 内容复制
 内置函数`copy()`，见 `copy.go`
 
+### map
+```Go
+// 1. 声明
+var myMap map[string] PersonInfo
+// myMap - 变量名
+// string - 键类型
+// PersonInfo 值类型
+
+// 2 创建
+// 2.1 键类型为string，值类型为PersonInfo
+myMap = make(map[string] PersonInfo)
+
+// 2.2 指定cap
+myMap = make(map[string] PersonInfo, 100)
+
+// 2.3 创建并初始化
+myMap = map[string] PersonInfo {
+    "1234": PersonInfo{"1", "Jack", "Room 101, ..."},
+}
+
+// 3 赋值
+myMap["123"] = PersonInfo{"1", "Jack", "Room 101, ..."}
+
+// 4 删除
+// 如果key不存在，没有影响
+// 如果key=nil，将抛出异常
+delete(myMap, "123")
+
+// 5 查找
+value, ok := myMap["123"]
+if ok { // 找到了
+    // 处理找到的value
+}
+```
+
+### 2.4 流程控制
