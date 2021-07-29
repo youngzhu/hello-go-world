@@ -207,3 +207,111 @@ if ok { // 找到了
 ```
 
 ### 2.4 流程控制
+条件语句，注意点：
+1. 条件不需要`()`
+2. `{}`不能省略，即使只有一条语句
+3. `{`必须与`if`或`else`处于同一行
+4. `if`之后，条件语句之前，可以添加变量初始化语句，用`;`分隔
+5. 在有返回值的函数中，不允许将“最终的” `return`包含在`if-else`中
+
+```Go
+if a < 5 {
+    return 0
+} else {
+    return 1
+}
+
+// 注意点5：编译失败
+func example(x int) int {
+    if x == 0 {
+        return 5
+    } else {
+        return x
+    }
+}
+```
+
+选择语句——switch的结构特点：
+- `{`必须与`switch`处于同一行
+- 条件表达式不限定为常量或整数
+- 单个`case`中可以出现多个结果项
+- 不需要**break**来明确退出一个`case`
+- 只有明确添加关键字 `fallthrough` 才会继续执行紧跟的下一个`case`
+- 可以不设定`switch`后面的表达式，相当于`if-else`
+
+```Go
+switch i {
+    case 0:
+        fmt.Printf("0")
+    case 1:
+        fmt.Printf("1")
+    case 2:
+        fallthrough
+    case 3:
+        fmt.Printf("3")
+    case 4, 5, 6:
+        fmt.Printf("4, 5, 6")
+    default:
+        fmt.Printf("Default")
+}
+
+switch {
+    case 0 <= Num && Num <= 3:
+        fmt.Printf("0-3")
+    case 4 <= Num && Num <= 6:
+        fmt.Printf("4-6")
+}
+```
+
+循环语句—— 只支持 `for`
+注意点：
+- `{`必须与`for`处于同一行
+- `break`支持标签
+
+```Go
+sum := 0
+for i := 0; i < 10; i++ {
+    sum += i
+}
+
+// 简化，无限循环
+sum := 0
+for {
+    sum ++
+    if sum > 100 {
+        break
+    }
+}
+
+// 多重赋值
+a := []int{1, 2, 3, 4, 5, 6}
+for i, j := 0, len(a) - 1; i < j; i, j = i + 1, j - 1 {
+    a[i], a[j] = a[j], a[i]
+}
+
+for j := 0; j < 5; j++ {
+    for i := 0; i < 10; i++ {
+        if i > 5 {
+            break JLoop
+        }
+        fmt.Println(i)
+    }
+}
+JLoop:
+//...
+```
+
+跳转语句 `goto`
+```Go
+func myfunc() {
+    i := 0
+    HERE:
+    fmt.Println(i)
+    i++
+    if i < 10 {
+        goto HERE
+    }
+}
+```
+
+### 2.5 函数
