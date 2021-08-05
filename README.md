@@ -3,7 +3,7 @@ Go学习从这里开始
 
 ## Resources
 - [https://golang.google.cn/](https://golang.google.cn/)  
-    https://golang.org/ 的替身，无需梯子
+    https://golang.org/ 的镜像（替身），无需梯子。
 
 ## References
 - [https://studygolang.com/articles/23826](https://studygolang.com/articles/23826)  
