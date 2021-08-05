@@ -315,3 +315,105 @@ func myfunc() {
 ```
 
 ### 2.5 函数
+函数的 定义
+```Go
+func Add(a int, b int) (ret int, err error) {
+    if a < 0 || b < 0 { // 只支持两个非负数的加法
+        err = errors.New("Should be non-negative numbers!")
+        return
+    }
+    return a + b, nil // 支持多重返回
+}
+
+// 若类型相同可省略前面的类型声明
+func Add(a, b int) (ret int, err error) {
+
+}
+
+// 如果只有一个 值
+func Add(a, b int) int {
+
+}
+```
+
+不定参数
+```Go
+func myfunc(args ...int) {
+    for _, arg := range args {
+        fmt.Println(arg)
+    }
+}
+
+// 调用
+myfunc(2, 3, 4)
+myfunc(1, 3, 7, 13)
+
+// 传递
+func myfunc3(args ...int) {
+
+}
+
+func myfunc(args ...int) {
+    // 原样传递
+    myfunc3(args...)
+
+    // 传递片段
+    myfunc3(args[1:]...)
+}
+
+```
+
+任意类型的不定参数，见 `varg1.go`
+
+可以定义多返回值，不需要的时候，可以不接收
+```Go
+func MyFunc(i int) (o int, err error)
+
+// 不需要时，用 _ 接收返回
+result, _ := MyFunc(100)
+```
+
+匿名函数
+```Go
+// 匿名函数由一个不带函数名的函数声明和函数体组成
+func(a, b int, z float64) bool {
+    return a*b < int(z)
+}
+
+// 匿名函数可以直接赋值给一个变量或直接执行
+f := func(x, y int) int {
+    return x+y
+}
+
+func (ch chan int) {
+    ch <- ACK
+} (reply_chan) // 花括号后直接跟参数列表 表示函数的调用
+```
+
+闭包，参见代码，closure.go 。
+不知道在讲什么。。
+
+### 2.6 错误处理
+#### 2.6.1 error接口
+```Go
+// 接口定义
+type error interface {
+    Error() string
+}
+
+// 大多数函数，定义遵循以下模式：将error最后一个返回值
+func Foo(param int) (n int, err error) {
+    // ...
+}
+
+// 错误处理
+n, err := Foo(0)
+
+if err != nil {
+    // 错误处理
+} else {
+    // 使用返回值 n
+}
+```
+
+#### 2.6.2 defer
