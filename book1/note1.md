@@ -417,3 +417,36 @@ if err != nil {
 ```
 
 #### 2.6.2 defer
+类似于Java中的 `finally`。
+需要注意的是，defer的调用遵照“先进后出”的原则，即最后一个defer（同一个函数中）将最先被执行。
+
+只不过，当你需要为到底哪个先执行这种细节而烦恼的时候，说明代码的架构可能需要调整一下了。
+
+```Go
+// 即使函数执行过程中出现异常，dstFile和srcFile都会被关闭
+func CopyFile(dst, src string) (w int64, err error) {
+    srcFile, err := os.Open(src)
+    if err != nil {
+        return
+    }
+    defer srcFile.Close()
+
+    dstFile, err := os.Create(dstName)
+    if err != nil {
+        return
+    }
+    defer dstFile.Close()
+
+    return io.Copy(dstFile, srcFile)
+}
+
+// 如果一句话做不完清理工作，也可以在 defer 后使用一个匿名函数
+defer func() {
+    // 复杂的清理工作
+} ()
+```
+
+#### 2.6.3 panic()和recover()
+没太明白。后面再看吧。
+Go的两个内置函数，处理异常用的。
+
