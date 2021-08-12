@@ -450,3 +450,159 @@ defer func() {
 没太明白。后面再看吧。
 Go的两个内置函数，处理异常用的。
 
+## ch03 面向对象编程
+### 3.1 类型
+Go语言和C语言一样，类型都是基于值传递的。想要修改变量的值，只能传递指针。
+详见 value_pointer.go
+
+Go语言中的数组和基本类型没有区别，都是值类型（传递）。
+详见 array_value.go
+
+### 3.2 初始化
+```Go
+//矩形类型
+type Rect struct {
+    x, y float64
+    width, height float64
+}
+// 初始化
+rect1 := new(Rect)
+rect2 := &Rect{}
+rect3 := &Rect{0, 0, 100, 200}
+rect4 := &Rect{width:100, height:200}
+
+// Go语言中没有构造函数的概念
+// 可由一个全局的创建函数来创建对象，通常 NewXXX 来命名
+
+// 重要的是格式，或称作模板
+func NewRect(x, y, width, height float64) *Rect {
+    return &Rect{x, y, width, height}
+}
+
+```
+
+### 3.3 匿名组合
+关于继承的，看的稀里糊涂。有必要的话，再回头看吧。
+
+### 3.4 可见性
+首字母大写表示公开，小写表示私有。
+需要注意的是，可访问性是包（package）一级的而不是类型（type）一级的。
+也就是说，尽管小写的是私有的，但在同一个包中的其他类型也可以访问。
+
+### 3.5 接口
+只要实现了接口中的方法就算实现了接口，没有`implements`之类的关键字
+
+#### 3.5.3 接口赋值
+将对象实例赋值给接口
+要求：对象实现了接口所有的方法
+```Go
+type LessAdder interface {
+    Less(b Integer) bool
+    Add(b Integer)
+}
+
+type Integer int
+
+func (a Integer) Less(b Integer) bool {
+    return a < b
+}
+
+func (a *Integer) Add(b Integer) {
+    *a += b
+}
+
+var a Integer = 1
+var b LessAdder = &a // 正确
+var c LessAdder = a // 错误，因为 Add 方法需要引用传递
+
+type Lesser interface {
+    Less(b Integer) bool
+}
+
+var a Integer = 1
+var b Lesser = &a // 两种赋值都可以
+var c Lesser = a
+
+```
+
+将一个接口赋值给另一个接口
+只要两个接口拥有相同的方法列表（顺序不重要），那么它们就是等价的，可以互相赋值。
+```Go
+// 第一个接口
+package one
+
+type ReadWriter interface {
+    Read(buf []byte) (n int, err error)
+    Write(buf []byte) (n int, err error)
+}
+
+// 第二个接口
+package two
+
+type IStream interface {
+    // 顺序和接口1相反
+    Write(buf []byte) (n int, err error)
+    Read(buf []byte) (n int, err error)
+}
+
+// 赋值
+var file1 two.IStream = new(File)
+var file2 one.ReadWriter = file1
+var file3 two.IStream = file2
+```
+
+接口赋值并不要求两个接口完全等价。
+如果接口A的方法列表是接口B方法列表的子集，那么接口B可以赋值给A，反之则不行。
+```Go
+type Writer interface {
+    Write(buf []byte) (n int, err error)
+}
+
+var file1 two.IStream = new(File)
+var file2 Writer = feil1 // 可以
+
+//反之则不行
+var file3 Writer = new(File)
+var file4 two.IStream = file3 // 编译不通过，因为file3没有Read方法
+```
+
+#### 3.5.4 接口查询
+```Go
+// 检查file指向的对象实例是否实现了two.IStream接口
+// 如何实现了，则执行
+if stream, ok := file.(two.IStream); ok {
+    ...
+}
+
+// 判断file1指向的对象实例是不是*File类型
+// 如果是，则执行
+if file2, ok := file1.(*File); ok {
+    ...
+}
+```
+
+#### 3.5.5 类型查询
+```Go
+var v1 interface{} = ...
+switch v := v1.(type) {
+    case int:  // v 的类型是int
+    case string: // v 的类型是string
+    ...
+}
+```
+
+#### 3.5.6 接口组合
+可以把接口组合当成是类型匿名组合的一个特定场景。
+只不过接口只包含方法，而不包含任何成员变量。
+```Go
+type ReadWriter interface {
+    Reader
+    Writer
+}
+
+// 完全等同于如下写法
+type ReadWriter interface {
+    Read(p []byte) (n int, err error)
+    Write(p []byte) (n int, err error)
+}
+```
