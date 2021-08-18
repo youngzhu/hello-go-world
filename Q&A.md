@@ -1,17 +1,9 @@
-## Q0: VSCode（因为墙）无法下载必要的Module？
-设置代理，命令窗口下执行：
-```
-go env -w GOPROXY=https://goproxy.cn,direct
-go env -w GOSUMDB="sum.golang.google.cn" #不确定这个是否必要，我都改了
-```
+# 学习过程中的疑问
 
-可通过`go env`查看当前的值。
+## Q1: build/run命令和gopath及项目目录之间的关系
 
-## Q1: VSCode中如何运行Go程序？
-Extensions，搜索并安装 **Code Runner** 插件
+## Q2: *和&的区别和用途
 
-## Q2: 错误提示：... cannot find main module ...
-在命令窗口执行如下命令
-```
-go env -w GO111MODULE=off
-```
+## Q3: package和目录名必须一致吗？
+不必。
+其实想多了，main包就不在main目录下。

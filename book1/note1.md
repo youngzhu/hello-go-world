@@ -606,3 +606,91 @@ type ReadWriter interface {
     Write(p []byte) (n int, err error)
 }
 ```
+## ch04 并发编程
+### 4.5.1 channel的基本语法
+声明
+`var chanName chan ElementType`
+举例
+```Go
+// 传递类型为int的channel
+var ch  chan int
+
+// 声明一个map，元素是bool类型的channel
+var m map[string] chan bool
+
+// 声明并初始化一个int类型的名为ch的channel
+ch := make(chan int)
+
+// 写入和读取都会导致阻塞
+// 写入数据
+ch <- value
+
+// 读取数据
+value := <- ch
+```
+### 4.5.2 select
+```Go
+select {
+    case <- ch1:
+    // 如果ch1成功读到数据，则执行
+    case ch2 <- 2:
+    // 如果成功向ch2写入数据，则执行
+    default: // 可以没有
+    // 如果上面的都没成功，则执行
+}
+```
+### 4.5.3 缓冲机制
+```Go
+// 即使没有读取方，也可以一直写入
+// 在缓冲区被填满之前都不会阻塞
+ch := make(chan int, 1024)
+
+//也可以使用range
+for i := range ch {
+    fmt.Println("Received:", i)
+}
+```
+### 4.5.4 超时机制
+用select实现超时机制。select的一个特点就是：只要其中一个case满足，程序就会继续执行，而不会考虑其他的case。
+```Go
+//首先，实现并执行一个匿名的超时等待函数
+timeout := make(chan bool, 1)
+go func() {
+    time.Sleep(1e9) // 等待1秒
+    timeout <- true
+}()
+
+select {
+    case <- ch:
+        // 从ch读取数据
+    case <- timeout:
+        // 一直没能从ch中读取到数据，但从timeout中读取到了
+}
+```
+
+### 4.5.6 单向channel
+```Go
+// 声明
+var ch1 chan int // 正常的channel
+var ch2 chan<- float64 // 单向的，只能写float64类型的数据
+var ch3 <-chan int // 单向的，只用于读取int类型的数据
+
+// 初始化
+ch4 := make(chan int)
+ch5 := <-chan int(ch4) // 单向的读取
+ch6 := chan<- int(ch4) // 单向的写入
+
+//用法
+// 只读，类似于java中的final
+func Parse(ch <-chan int) {
+    for value := range ch {
+        fmt.Println("Parsing value", value)
+    }
+}
+```
+
+### 4.5.7 关闭channel
+`close(ch)` 内置函数
+
+如何判断一个channel是否已关闭？
+`_, ok := <- ch`，ok为false则表示已关闭。
