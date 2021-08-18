@@ -3,10 +3,12 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"mlib/library"
+	"mp"
 	"os"
 	"strconv"
 	"strings"
+
+	"library"
 )
 
 var lib *library.MusicManager
@@ -28,12 +30,14 @@ func handleLibCommand(tokens []string) {
 		} else {
 			fmt.Println("USAGE: lib add <name><artist><source><type>")
 		}
-	case "remove":
-		if len(tokens) == 3 {
-			lib.RemoveByName(tokens[2])
-		} else {
-			fmt.Println("USAGE: lib remove <name>")
-		}
+		/*
+			case "remove":
+				if len(tokens) == 3 {
+					lib.Remove(tokens[2])
+				} else {
+					fmt.Println("USAGE: lib remove <name>")
+				}
+		*/
 	default:
 		fmt.Println("Unrecognized lib command:", tokens[1])
 	}
@@ -51,7 +55,7 @@ func handlePlayCommand(tokens []string) {
 		return
 	}
 
-	e.Play(e.Source, e.Type, ctrl, signal)
+	mp.Play(e.Source, e.Type)
 }
 
 func main() {
