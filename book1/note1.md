@@ -734,3 +734,13 @@ IPv4Mask(a, b, c, d byte) IPMask // 创建子网掩码
 ResolveIPAddr(net, addr string) (*IPAddr, error)
 LookupHost(name string) (cnname string, addrs []string, err error)
 ```
+### 5.3 RPC编程
+只有满足以下条件的方法才能作为RPC服务端被远程访问
+- 公开（首字母大写）
+- 必须有两个参数，且参数的类型都是包外可访问的类型或内建的类型
+- 第二个参数必须是指针
+- 必须返回一个`error`类型的值
+
+如 `func (t *T) MethodName(arg1 T1, reply *T2) error`
+第一个参数是由RPC客户端传入的参数
+第二个参数表示要返回给客户端的结果
