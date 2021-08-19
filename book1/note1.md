@@ -694,3 +694,43 @@ func Parse(ch <-chan int) {
 
 如何判断一个channel是否已关闭？
 `_, ok := <- ch`，ok为false则表示已关闭。
+
+## ch05 网络编程
+### 5.1 Socket编程
+#### Dial() 函数
+```Go
+// 定义
+// net 是网络协议的名字，tcp 等
+// addr 是ip地址或域名
+func Dial(net, addr string) (Conn, error)
+
+// 例子
+// TCP连接
+conn, err := net.Dial("tcp", "192.168.0.10:2100")
+
+// UDP连接
+conn, err := net.Dial("udp", "192.168.0.12:975")
+
+// ICMP连接（使用协议名称）
+conn, err := net.Dial("ip4:icmp", "www.google.cn")
+// 使用协议编号
+conn, err := net.Dial("ip4:1", "10.0.0.3")
+
+// 发送数据
+conn.Write()
+// 接收数据
+conn.Read()
+
+// Dial() 是对 DialTCP(),DialUDP(),DialIP(),DialUnix()的封装，也可以直接调用这些函数
+func DialTCP(net string, laddr, raddr *TCPAddr) (c *TCPConn, err error)
+...
+
+// 工具函数
+net.ParseIP() // 验证IP的有效性
+IPv4Mask(a, b, c, d byte) IPMask // 创建子网掩码
+(ip IP) DefaultMask() IPMask // 获取默认子网掩码
+
+// 根据域名查找IP
+ResolveIPAddr(net, addr string) (*IPAddr, error)
+LookupHost(name string) (cnname string, addrs []string, err error)
+```
