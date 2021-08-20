@@ -744,3 +744,5 @@ LookupHost(name string) (cnname string, addrs []string, err error)
 如 `func (t *T) MethodName(arg1 T1, reply *T2) error`
 第一个参数是由RPC客户端传入的参数
 第二个参数表示要返回给客户端的结果
+
+## ch06 安全编程
