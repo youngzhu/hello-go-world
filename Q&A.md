@@ -6,7 +6,15 @@ _注：答案不是100%准确，是基于仅有的经验的总结。_
 在如今IDE盛行的年代好像也没多大必要。
 
 ## Q2: *和&的区别和用途
-&：获取地址运算符。`&foo`，获取值类型变量foo的地址
+### &
+获取地址运算符。`&foo`，获取值类型变量foo的地址
+定义一个指针变量
+    lisa := &user{"Lisa", "lisa@mail.com"}
+### *
+1. 声明方法时，表示指针接收者
+    func (u *user) changeEmail
+2. 表示指针变量指向的值
+    (*lisa) // lisa是指针变量
 
 ## Q3: package和目录名必须一致吗？
 必须一致。可参见ch03 SMP，根据原文应该是path：`mlib`，package：`libaray`，但怎么都编译不通过。将path改成`libaray`就好了。  
