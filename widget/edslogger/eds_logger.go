@@ -14,6 +14,7 @@ func main() {
 	r, err := http.Get(URL)
 	if err != nil {
 		fmt.Println(err)
+		// 正常返回还不行，需要有错误发送邮件通知
 		return
 	}
 
