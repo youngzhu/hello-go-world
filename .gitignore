@@ -1,5 +1,7 @@
 *.exe
 *.out
 .vscode
+
 # 忽略目录
 uploads/
+secretdata/

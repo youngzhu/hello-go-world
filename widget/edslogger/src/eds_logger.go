@@ -9,6 +9,8 @@ import (
 	"net/url"
 	"strings"
 
+	"secret"
+
 	"github.com/PuerkitoBio/goquery"
 )
 
@@ -19,13 +21,18 @@ const USET_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/
 const ACCEPT_LANGUAGE = "zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7"
 const ACCEPT_ENCODING = "gzip, deflate"
 
-// 稍后隐藏
-const COOKIE = "ASP.NET_SessionId=4khtnz55xiyhbmncrzmzyzzc; ActionSelect=010601; Hm_lvt_416c770ac83a9d996d7b3793f8c4994d=1569767826; Hm_lpvt_416c770ac83a9d996d7b3793f8c4994d=1569767826; PersonId=12234"
-
 var postProperties = make(map[string]string)
 var getProperties = make(map[string]string)
 
+var secretInfo *secret.Secret
+var err error
+
 func init() {
+	secretInfo, err = secret.RetrieveSecret()
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	// post
 	postProperties["Host"] = HOST
 	postProperties["Content-Length"] = "6955"
@@ -37,7 +44,7 @@ func init() {
 	postProperties["Accept"] = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3"
 	postProperties["Accept-Encoding"] = ACCEPT_ENCODING
 	postProperties["Accept-Language"] = ACCEPT_LANGUAGE
-	postProperties["Cookie"] = COOKIE
+	postProperties["Cookie"] = secretInfo.Cookie
 	postProperties["connection"] = "Keep-Alive"
 	postProperties["accept"] = "*/*"
 	postProperties["user-agent"] = "Mozilla/5.0"
@@ -48,7 +55,7 @@ func init() {
 	getProperties["Accept"] = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8"
 	getProperties["Accept-Encoding"] = ACCEPT_ENCODING
 	getProperties["Accept-Language"] = ACCEPT_LANGUAGE
-	getProperties["Cookie"] = COOKIE
+	getProperties["Cookie"] = secretInfo.Cookie
 	getProperties["Host"] = HOST
 }
 
@@ -104,17 +111,18 @@ func login() error {
 	defer resp.Body.Close()
 
 	// 登录
-	// data := `{"UserId":"12234", "UserPsd":"young122345"}`
-	data := "UserId=12234&UserPsd=young12234"
+	// data := `{"UserId":"###", "UserPsd":"***"}`
+	// data := "UserId=###&UserPsd=***"
 	// params := url.Values{
-	// 	"UserId":  {"12234"},
-	// 	"UserPsd": {"young12234"},
+	// 	"UserId":  {"###"},
+	// 	"UserPsd": {"***"},
 	// }
 	params := url.Values{}
-	params.Add("UserId", "12234")
-	params.Add("UserPsd", "young12234")
+	params.Add("UserId", secretInfo.UserId)
+	params.Add("UserPsd", secretInfo.UserPsd)
 	var request *http.Request
-	request, err = http.NewRequest(http.MethodPost, URL_LOGIN, strings.NewReader(data))
+	// request, err = http.NewRequest(http.MethodPost, URL_LOGIN, strings.NewReader(data))
+	request, err = http.NewRequest(http.MethodPost, URL_LOGIN, strings.NewReader(params.Encode()))
 	if err != nil {
 		return err
 	}
@@ -186,6 +194,7 @@ func getValueFromHtml(html, key string) string {
 }
 
 func main() {
+
 	err := login()
 	if err != nil {
 		// 正常返回还不行，需要有错误发送邮件通知
