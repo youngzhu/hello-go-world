@@ -108,6 +108,32 @@ func doWorkLog(workLogUrl, logDate, timeFlag string, hiddenParams map[string]str
 	log.Println("日志操作成功")
 }
 
+func workWeeklyLog(logDate string) {
+	logUrl := "http://eds.newtouch.cn/eds36web/WorkWeekly/WorkWeeklyInfo.aspx"
+
+	// 先通过get获取一些隐藏参数，用作后台校验
+	hiddenParams := getHiddenParams(logUrl)
+
+	logParams := url.Values{}
+	logParams.Set("hidCurrRole", "")
+	logParams.Set("hidWeeklyState", "")
+	logParams.Set("WeekReportDate", logDate)
+	logParams.Set("txtWorkContent", "编码与测试")
+	logParams.Set("txtStudyContent", "算法与数据结构")
+	logParams.Set("txtSummary", "算法的性能不能不考虑，也不能过度优化")
+	logParams.Set("txtPlanWork", "对常量的重构")
+	logParams.Set("txtPlanStudy", "Oracle")
+	logParams.Set("btnSubmit", "%E6%8F%90%E4%BA%A4")
+
+	for key, value := range hiddenParams {
+		logParams.Set(key, value)
+	}
+
+	myhttp.DoRequest(logUrl, http.MethodPost, cookie, strings.NewReader(logParams.Encode()))
+
+	log.Println("周报填写成功")
+}
+
 func getHiddenParams(url string) map[string]string {
 	result := make(map[string]string)
 
@@ -155,6 +181,8 @@ func main() {
 	}
 	log.Println("登陆成功")
 
-	workLog("2021-09-18")
+	// workLog("2021-09-18")
+
+	workWeeklyLog("2021-09-13")
 
 }
