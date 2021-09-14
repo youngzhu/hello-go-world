@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"net/url"
@@ -60,7 +59,53 @@ func workLog(logDate string) {
 
 	// 先通过get获取一些隐藏参数，用作后台校验
 	hiddenParams := getHiddenParams(url)
-	fmt.Println(hiddenParams)
+	// fmt.Println(hiddenParams)
+
+	doWorkLog(url, logDate, "AM", hiddenParams)
+	doWorkLog(url, logDate, "PM", hiddenParams)
+}
+
+func doWorkLog(workLogUrl, logDate, timeFlag string, hiddenParams map[string]string) {
+
+	startTime := "10:00"
+	endTime := "12:00"
+	if "PM" == timeFlag {
+		startTime = "13:00"
+		endTime = "18:00"
+	}
+
+	logParams := url.Values{}
+	logParams.Set("__EVENTTARGET", "hplbWorkType")
+	logParams.Set("__EVENTARGUMENT", "")
+	logParams.Set("__LASTFOCUS", "")
+	logParams.Set("__VIEWSTATEGENERATOR", "3A8BE513")
+	logParams.Set("txtDate", logDate)
+	logParams.Set("txtStartTime", startTime)
+	logParams.Set("txtEndTime", endTime)
+	logParams.Set("ddlProjectList", "10868")
+	logParams.Set("hplbWorkType", "0106")
+	logParams.Set("hplbAction", "010601")
+	logParams.Set("TextBox1", "")
+	logParams.Set("txtMemo", "编码与测试")
+	logParams.Set("btnSave", "+%E7%A1%AE+%E5%AE%9A+")
+	logParams.Set("txtnodate", logDate)
+	logParams.Set("txtnoStartTime", startTime)
+	logParams.Set("txtnoEndTime", endTime)
+	logParams.Set("TextBox6", "")
+	logParams.Set("txtnoMemo", "")
+	logParams.Set("txtCRMDate", logDate)
+	logParams.Set("txtCRMStartTime", startTime)
+	logParams.Set("txtCRMEndTime", endTime)
+	logParams.Set("TextBox5", "")
+	logParams.Set("txtCRMMemo", "")
+
+	for key, value := range hiddenParams {
+		logParams.Set(key, value)
+	}
+
+	myhttp.DoRequest(workLogUrl, http.MethodPost, cookie, strings.NewReader(logParams.Encode()))
+
+	log.Println("日志操作成功")
 }
 
 func getHiddenParams(url string) map[string]string {
@@ -110,6 +155,6 @@ func main() {
 	}
 	log.Println("登陆成功")
 
-	workLog("2021-09-10")
+	workLog("2021-09-18")
 
 }

@@ -43,7 +43,7 @@ func init() {
 
 // http请求，返回 string
 func DoRequest(url, method, cookie string, body io.Reader) string {
-	log.Println(url)
+	// log.Println(url)
 	request, err := http.NewRequest(method, url, body)
 	if err != nil {
 		panic(err)
