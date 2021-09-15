@@ -20,15 +20,22 @@ func main() {
 
 	// 获取当前时间
 	t := time.Now()
-	log.Println(t)
+	todayStr := t.Format("2006-01-02")
 
 	for i := 0; i < 5; i++ {
-		time.Sleep(time.Duration(rand.Intn(1000)) * time.Millisecond)
-		t = t.Add(time.Hour * 24)
+		time.Sleep(time.Duration(rand.Intn(3000)) * time.Millisecond)
+		logDay := t.Add(time.Hour * time.Duration(24*i))
 		// log.Println(fmt.Sprintf("%d-%d-%d", t.Year(), t.Month(), t.Day()))
 		// "2006-01-02 15:04:05"
 		// 这算小彩蛋吗？还必须这个时间才行。。。
-		log.Println(t.Format("2006-01-02"))
+		// log.Println(t.Format("2006-01-02"))
+		// log.Println(time.Now().Format("2006-01-02 15:04:05"))
+
+		log.Println("日报", logDay.Format("2006-01-02"))
 	}
+
+	time.Sleep(5 * time.Second)
+
+	log.Println("周报", todayStr)
 
 }

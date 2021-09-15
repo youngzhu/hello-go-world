@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"time"
 
 	myhttp "http"
 	"secret"
@@ -182,6 +183,8 @@ func main() {
 	log.Println("登陆成功")
 
 	// workLog("2021-09-18")
+
+	time.Sleep(5 * time.Second)
 
 	workWeeklyLog("2021-09-13")
 
