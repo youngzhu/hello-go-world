@@ -5,6 +5,11 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  schedule: 
+  # 使用的UTC时间
+  # 北京时间=UTC + 8 => UTC = 北京时间 - 8
+  # 每周一10:15（北京时间）执行一次
+  - cron: '15 2 * * 1'
 
 jobs:
 
