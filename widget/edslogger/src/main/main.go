@@ -38,4 +38,6 @@ func main() {
 
 	log.Println("周报", todayStr)
 
+	// date := time.Date(2021, 9, 18, 13, 14, 59, 0, time.UTC)
+
 }
