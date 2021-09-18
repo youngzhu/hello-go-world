@@ -132,6 +132,9 @@ func workWeeklyLog(logDate string) {
 	}
 
 	myhttp.DoRequest(logUrl, http.MethodPost, cookie, strings.NewReader(logParams.Encode()))
+	
+	// resp := myhttp.DoRequest(logUrl, http.MethodPost, cookie, strings.NewReader(logParams.Encode()))
+	// log.Println(resp)
 
 	log.Println("周报填写成功", logDate)
 }
@@ -179,6 +182,7 @@ func logFromSpecificDay(logFrom time.Time) {
 	logDateDaliy := logFrom
 
 	// 先写周报
+	// 只能填写本周周报!!!
 	workWeeklyLog(logDateWeekly)
 
 	time.Sleep(15 * time.Second)
@@ -190,7 +194,6 @@ func logFromSpecificDay(logFrom time.Time) {
 		time.Sleep(time.Duration(rand.Intn(3000)) * time.Millisecond)
 		logDateDaliy = logDateDaliy.Add(time.Hour * 24)
 	}
-
 
 }
 
