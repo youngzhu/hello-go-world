@@ -214,7 +214,7 @@ func main() {
 
 	// workWeeklyLog("2021-09-13")
 
-	logFrom, _ := time.Parse(time.RFC3339, "2021-09-20T00:00:00+08:00")
+	logFrom, _ := time.Parse("2006-01-02", "2021-09-18")
 
 	logFromSpecificDay(logFrom)
 
