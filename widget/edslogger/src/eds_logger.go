@@ -6,6 +6,7 @@ import (
 	"net/url"
 	"strings"
 	"time"
+	"math/rand"
 
 	myhttp "http"
 	"secret"
@@ -106,7 +107,7 @@ func doWorkLog(workLogUrl, logDate, timeFlag string, hiddenParams map[string]str
 
 	myhttp.DoRequest(workLogUrl, http.MethodPost, cookie, strings.NewReader(logParams.Encode()))
 
-	log.Println("日志操作成功")
+	log.Println("日志操作成功", logDate, timeFlag)
 }
 
 func workWeeklyLog(logDate string) {
@@ -132,7 +133,7 @@ func workWeeklyLog(logDate string) {
 
 	myhttp.DoRequest(logUrl, http.MethodPost, cookie, strings.NewReader(logParams.Encode()))
 
-	log.Println("周报填写成功")
+	log.Println("周报填写成功", logDate)
 }
 
 func getHiddenParams(url string) map[string]string {
@@ -171,6 +172,28 @@ func getValueFromHtml(html, key string) string {
 	return value
 }
 
+// 按指定的日期填写eds
+func logFromSpecificDay(logFrom time.Time) {
+
+	logDateWeekly := logFrom.Format("2006-01-02")
+	logDateDaliy := logFrom
+
+	// 先写周报
+	workWeeklyLog(logDateWeekly)
+
+	time.Sleep(15 * time.Second)
+
+	// 再写日报
+	for i := 0; i < 5; i++ {
+		workLog(logDateDaliy.Format("2006-01-02"))
+
+		time.Sleep(time.Duration(rand.Intn(3000)) * time.Millisecond)
+		logDateDaliy = logDateDaliy.Add(time.Hour * 24)
+	}
+
+
+}
+
 func main() {
 
 	err := login()
@@ -184,8 +207,12 @@ func main() {
 
 	// workLog("2021-09-18")
 
-	time.Sleep(5 * time.Second)
+	// time.Sleep(5 * time.Second)
 
-	workWeeklyLog("2021-09-13")
+	// workWeeklyLog("2021-09-13")
+
+	logFrom, _ := time.Parse(time.RFC3339, "2021-09-20T00:00:00+08:00")
+
+	logFromSpecificDay(logFrom)
 
 }
