@@ -29,4 +29,4 @@ jobs:
         password: ${{ secrets.EDS_PASSWORD }}
         # 时区设置为上海
         TZ: Asia/Shanghai
-      run: go run widget/edslogger/main.go
+      run: cd widget/edslogger/src/main && go run main.go
