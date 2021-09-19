@@ -11,8 +11,9 @@ on:
 jobs:
 
   # 工作流
-  build:
+  do-log:
     runs-on: ubuntu-latest
+    
     steps:
     - uses: actions/checkout@v2
 
@@ -21,8 +22,10 @@ jobs:
       with:
         go-version: 1.17
 
-    - name: Build
-      run: go build -v ./...
-
-    - name: Test
-      run: go test -v ./...
+    - name: Run
+      env:
+        user_id: ${{ secrets.EDS_USER_ID }}
+        password: ${{ secrets.EDS_PASSWORD }}
+        # 时区设置为上海
+        TZ: Asia/Shanghai
+      run: go run widget/edslogger/main.go
