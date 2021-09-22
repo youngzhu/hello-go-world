@@ -1,4 +1,4 @@
-package main
+package logger
 
 import (
 	"log"
@@ -27,7 +27,7 @@ func init() {
 	cookie = secretInfo.Cookie
 }
 
-func login() error {
+func Login() error {
 	// 检验网站是否正常
 	resp, err := http.Head(myhttp.URL_HOME) // 只请求网站的 http header信息
 	if err != nil {
@@ -176,7 +176,7 @@ func getValueFromHtml(html, key string) string {
 }
 
 // 按指定的日期填写eds
-func logFromSpecificDay(logFrom time.Time) {
+func LogFromSpecificDay(logFrom time.Time) {
 
 	logDateWeekly := logFrom.Format("2006-01-02")
 	logDateDaliy := logFrom
@@ -197,25 +197,3 @@ func logFromSpecificDay(logFrom time.Time) {
 
 }
 
-func main() {
-
-	err := login()
-	if err != nil {
-		// 正常返回还不行，需要有错误发送邮件通知
-		// return
-		log.Fatalln("网站服务错误", err)
-		// os.Exit(1)
-	}
-	log.Println("登陆成功")
-
-	// workLog("2021-09-18")
-
-	// time.Sleep(5 * time.Second)
-
-	// workWeeklyLog("2021-09-13")
-
-	logFrom, _ := time.Parse("2006-01-02", "2021-09-18")
-
-	logFromSpecificDay(logFrom)
-
-}
