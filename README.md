@@ -10,10 +10,10 @@ Go学习从这里开始
     设置代理（env）。可解决下载module需要翻墙的的问题。
  
 ## 快问快答
-详见[Q&A.md](Q&A.md)
+详见 [Q&A.md](Q&A.md)
 
 ## 小技巧
-详见 tricks.md
+详见 [tricks.md](tricks.md)
 
 ## 坑
-详见 keng.md
+详见 [keng.md](keng.md)
