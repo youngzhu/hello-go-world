@@ -2,11 +2,11 @@ package logger
 
 import (
 	"log"
+	"math/rand"
 	"net/http"
 	"net/url"
 	"strings"
 	"time"
-	"math/rand"
 
 	myhttp "http"
 	"secret"
@@ -18,16 +18,9 @@ var secretInfo *secret.Secret
 var err error
 var cookie string
 
-func init() {
-	secretInfo, err = secret.RetrieveSecret()
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	cookie = secretInfo.Cookie
-}
-
-func Login() error {
+// secretStr 输入参数
+// 如果为空，则从文件中读取
+func Login(secretStr *string) error {
 	// 检验网站是否正常
 	resp, err := http.Head(myhttp.URL_HOME) // 只请求网站的 http header信息
 	if err != nil {
@@ -35,6 +28,17 @@ func Login() error {
 	}
 
 	defer resp.Body.Close()
+
+	if secretStr != nil {
+		secretInfo = secret.Parse(secretStr)
+	} else {
+		secretInfo, err = secret.RetrieveSecret()
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
+
+	cookie = secretInfo.Cookie
 
 	loginUrl := "http://eds.newtouch.cn/eds3/DefaultLogin.aspx?lan=zh-cn"
 	// 登录
@@ -132,7 +136,7 @@ func workWeeklyLog(logDate string) {
 	}
 
 	myhttp.DoRequest(logUrl, http.MethodPost, cookie, strings.NewReader(logParams.Encode()))
-	
+
 	// resp := myhttp.DoRequest(logUrl, http.MethodPost, cookie, strings.NewReader(logParams.Encode()))
 	// log.Println(resp)
 
@@ -182,10 +186,10 @@ func LogFromSpecificDay(logFrom time.Time) {
 	logDateDaliy := logFrom
 
 	// 先写周报
-	// 只能填写本周周报!!!
+	// 只能填写本周周报（周一）!!!
 	workWeeklyLog(logDateWeekly)
 
-	time.Sleep(15 * time.Second)
+	time.Sleep(10 * time.Second)
 
 	// 再写日报
 	for i := 0; i < 5; i++ {
@@ -196,4 +200,3 @@ func LogFromSpecificDay(logFrom time.Time) {
 	}
 
 }
-

@@ -3,12 +3,17 @@ package main
 import (
 	"log"
 	"time"
+	"flag"
 
 	"logger"
 )
 
+var secretStr *string = flag.String("s", "sccretInfo", "login secret info")
+
 func main() {
-	err := logger.Login()
+	flag.Parse() // 解析入参
+
+	err := logger.Login(secretStr)
 	if err != nil {
 		// 正常返回还不行，需要有错误发送邮件通知
 		// return
