@@ -18,3 +18,6 @@ Extensions，搜索并安装 **Code Runner** 插件。
 ```
 go env -w GO111MODULE=off
 ```
+
+## Q3: VSCode保存go文件时很慢，提示：Getting code actions from "Go"
+可以去掉插件中的“Go”插件，如果对于在保存go文件时自动引入和自动格式化没有强烈需求的话。
