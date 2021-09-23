@@ -42,5 +42,5 @@ jobs:
       run: |
         echo $GITHUB_WORKSPACE
         cd widget/edslogger/src/main 
-        export .:GOROOT
+        export GOROOT = .:${{ env.GOROOT }}
         go run main_action.go -i $id -p $pwd -c $cookie
