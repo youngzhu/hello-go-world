@@ -28,7 +28,7 @@ jobs:
 
     - name: Run
       env:
-        GOPATH: ${{ GITHUB_WORKSPACE }}
+        GOPATH: $GITHUB_WORKSPACE
         id: ${{ secrets.EDS_LOGIN_ID }}
         pwd: ${{ secrets.EDS_LOGIN_PWD }}
         cookie: ${{ secrets.EDS_LOGIN_COOKIE }}
