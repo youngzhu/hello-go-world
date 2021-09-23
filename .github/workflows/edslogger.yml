@@ -3,10 +3,15 @@ name: EDS Logger
 on:
   push:
   schedule: 
+  # 1: minute (0-59)
+  # 2: hour (0-23)
+  # 3: day of month (1-31)
+  # 4: month (1-12 or JAN-DEC)
+  # 5: day of week (0-6 or SUN-SAT)
   # 使用的UTC时间
   # 北京时间=UTC + 8 => UTC = 北京时间 - 8
   # 每周一10:15（北京时间）执行一次
-  - cron: '15 2 * * 1'
+  - cron: '15 2 * * MON'
 
 # jobs 是总的，可以包含多个工作流
 jobs:
@@ -28,7 +33,7 @@ jobs:
 
     - name: Run
       env:
-        GOPATH: $GITHUB_WORKSPACE
+        GOPATH: ${GITHUB_WORKSPACE}
         id: ${{ secrets.EDS_LOGIN_ID }}
         pwd: ${{ secrets.EDS_LOGIN_PWD }}
         cookie: ${{ secrets.EDS_LOGIN_COOKIE }}
