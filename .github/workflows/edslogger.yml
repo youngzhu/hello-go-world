@@ -25,17 +25,15 @@ jobs:
         go-version: 1.16
 
     # uses 和 run 不能在一个步骤里
-    - name: Set GOPATH
-      run: |
-        export GOPATH=/home/runner/work/hello-go-world/hello-go-world/widget/edslogger/src
-        echo $GOPATH
 
     - name: Run
       env:
-        user_id: ${{ secrets.EDS_USER_ID }}
-        password: ${{ secrets.EDS_PASSWORD }}
+        GOPATH: ${{ GITHUB_WORKSPACE }}
+        id: ${{ secrets.EDS_LOGIN_ID }}
+        pwd: ${{ secrets.EDS_LOGIN_PWD }}
+        cookie: ${{ secrets.EDS_LOGIN_COOKIE }}
         # 时区设置为上海
         TZ: Asia/Shanghai
       run: |
         cd widget/edslogger/src/main 
-        go run main/main_action.go -i ${{ secrets.EDS_LOGIN_ID }} -p ${{ secrets.EDS_LOGIN_PWD }} -c ${{ secrets.EDS_LOGIN_COOKIE }}
+        go run main_action.go -i $id -p $pwd -c $cookie
