@@ -37,6 +37,6 @@ jobs:
         # 时区设置为上海
         TZ: Asia/Shanghai
       run: |
-        #cd widget/edslogger/src/main 
+        # cd widget/edslogger/src/main 
         pwd
-        go run main_action.go -i ${{ secrets.EDS_LOGIN_ID }} -p ${{ secrets.EDS_LOGIN_PWD }} -c ${{ secrets.EDS_LOGIN_COOKIE }}
+        go run main/main_action.go -i ${{ secrets.EDS_LOGIN_ID }} -p ${{ secrets.EDS_LOGIN_PWD }} -c ${{ secrets.EDS_LOGIN_COOKIE }}
