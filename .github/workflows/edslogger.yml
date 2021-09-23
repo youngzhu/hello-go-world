@@ -33,12 +33,13 @@ jobs:
 
     - name: Run
       env:
-        GOPATH: ${GITHUB_WORKSPACE}
+        GOPATH: ${{ env.GITHUB_WORKSPACE }}
         id: ${{ secrets.EDS_LOGIN_ID }}
         pwd: ${{ secrets.EDS_LOGIN_PWD }}
         cookie: ${{ secrets.EDS_LOGIN_COOKIE }}
         # 时区设置为上海
         TZ: Asia/Shanghai
       run: |
+        echo $GITHUB_WORKSPACE
         cd widget/edslogger/src/main 
         go run main_action.go -i $id -p $pwd -c $cookie
