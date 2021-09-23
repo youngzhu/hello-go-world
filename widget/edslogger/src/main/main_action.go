@@ -25,9 +25,9 @@ func main() {
 	// 还以为用上面的方式已经将参数赋给了变量
 	flag.Parse() // 解析入参
 
-	log.Println("id", userId)
-	log.Println("pwd", userPsd)
-	log.Println("cookie", cookie)
+	// log.Println("id", userId)
+	// log.Println("pwd", userPsd)
+	// log.Println("cookie", cookie)
 
 	loginInfo := secret.Secret{userId, userPsd, cookie}
 	err := logger.Login(&loginInfo)
@@ -37,7 +37,6 @@ func main() {
 		log.Fatalln("网站服务错误", err)
 		// os.Exit(1)
 	}
-	log.Println("登陆成功")
 
 	logFrom, _ := time.Parse("2006-01-02", "2021-09-20")
 	log.Println(logFrom)

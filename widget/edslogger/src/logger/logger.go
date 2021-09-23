@@ -55,7 +55,16 @@ func Login(loginInfo *secret.Secret) error {
 	// request, err = http.NewRequest(http.MethodPost, URL_LOGIN, strings.NewReader(data))
 	// request, err = http.NewRequest(http.MethodPost, loginUrl, strings.NewReader(params.Encode()))
 
-	myhttp.DoRequest(loginUrl, http.MethodPost, cookie, strings.NewReader(params.Encode()))
+	respStr := myhttp.DoRequest(loginUrl, http.MethodPost, cookie, strings.NewReader(params.Encode()))
+
+	// log.Println(respStr)
+
+	errMsg := "用户名或密码错误"
+	if strings.Contains(respStr, errMsg) {
+		log.Fatalln(errMsg)
+	}
+
+	log.Println("登陆成功")
 
 	return nil
 }
