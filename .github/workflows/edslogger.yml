@@ -40,7 +40,5 @@ jobs:
         # 时区设置为上海
         TZ: Asia/Shanghai
       run: |
-        echo $GITHUB_WORKSPACE
         cd widget/edslogger/src/main 
-        export GOROOT = .:${{ env.GOROOT }}
         go run main_action.go -i $id -p $pwd -c $cookie
