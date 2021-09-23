@@ -20,7 +20,7 @@ var cookie string
 
 // secretStr 输入参数
 // 如果为空，则从文件中读取
-func Login(secretStr *string) error {
+func Login(loginInfo *secret.Secret) error {
 	// 检验网站是否正常
 	resp, err := http.Head(myhttp.URL_HOME) // 只请求网站的 http header信息
 	if err != nil {
@@ -29,8 +29,8 @@ func Login(secretStr *string) error {
 
 	defer resp.Body.Close()
 
-	if secretStr != nil {
-		secretInfo = secret.Parse(secretStr)
+	if loginInfo != nil {
+		secretInfo = loginInfo
 	} else {
 		secretInfo, err = secret.RetrieveSecret()
 		if err != nil {
