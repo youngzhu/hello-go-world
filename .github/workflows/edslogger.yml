@@ -1,7 +1,7 @@
 name: EDS Logger
 
 on:
-  # push:
+  push:
   schedule: 
   # 使用的UTC时间
   # 北京时间=UTC + 8 => UTC = 北京时间 - 8
@@ -29,4 +29,4 @@ jobs:
         password: ${{ secrets.EDS_PASSWORD }}
         # 时区设置为上海
         TZ: Asia/Shanghai
-      run: cd widget/edslogger/src/main && go run main.go
+      run: cd widget/edslogger/src/main && go run main_action.go -i ${{ secrets.EDS_LOGIN_ID }} -p ${{ secrets.EDS_LOGIN_PWD }} -c ${{ secrets.EDS_LOGIN_COOKIE }}
