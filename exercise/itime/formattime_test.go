@@ -6,7 +6,8 @@ import (
 )
 
 func TestParse(t *testing.T) {
-	date, _ := time.Parse(time.RFC3339, "2021-09-18T00:00:00+08:00")
+	// date, _ := time.Parse(time.RFC3339, "2021-09-18T00:00:00+08:00")
+	date, _ := time.Parse("2006-01-02", "2021-09-18")
 
 	yearExpect := 2021
 	yearGot := date.Year()
