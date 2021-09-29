@@ -17,4 +17,8 @@
 
 这个方法也让我意识到，一个类型（type）和它的方法不一定要在一个go文件里。例如这里的Time类在time.go中，而Format方法在format.go中
 
-## 004 
+## 004 使用 flag 解析命令行参数时，bool类型的放最后
+```Go
+// 这样的输入，会导致n和t都取不到值
+go run sort_compare.go -a1 insertion -a2 selection -s true -n 1000 -t 100
+```
