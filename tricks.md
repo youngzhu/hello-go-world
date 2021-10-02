@@ -22,3 +22,17 @@
 // 这样的输入，会导致n和t都取不到值
 go run sort_compare.go -a1 insertion -a2 selection -s true -n 1000 -t 100
 ```
+通过在StackOverflow上提问知道了，bool只看是否存在，如 `ls -l`中的`-l`
+所以，正确的写法是：
+```Go
+// 表示s为true
+go run sort_compare.go -a1 insertion -a2 selection -s -n 1000 -t 100
+// 表示s为false
+go run sort_compare.go -a1 insertion -a2 selection -n 1000 -t 100
+```
+
+## 005 3种方法将整数转为字符串
+1. `fmt.Sprintf("%d", number)`
+2. `strconv.FormatInt(number, 10)`
+3. `strconv.Itoa(number)`
+通过基准测试，效率排名为：2-3-1
