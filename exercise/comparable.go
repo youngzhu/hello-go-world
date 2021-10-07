@@ -10,7 +10,8 @@ type Comparable interface {
 
 type ComparableInt int
 
-func (c ComparableInt) LessThan(another ComparableInt) bool {
+// 参数只能是 Comparable 类型
+func (c ComparableInt) LessThan(another Comparable) bool {
 	return false
 }
 
@@ -35,4 +36,5 @@ func main() {
 
 func Compare(a Comparable) {
 	fmt.Println(a)
+	fmt.Println(a.(ComparableInt))
 }
