@@ -3,7 +3,13 @@ package main
 import (
 	"net/http"
 	"io/ioutil"
+	"fmt"
+	"strings"
+	"compress/gzip"
+	"os"
 )
+
+const MAX_BYTES int = 100 // 文件是否压缩的阈值
 
 var url = "https://algs4.cs.princeton.edu/21elementary/words3.txt"
 
@@ -17,13 +23,52 @@ func main() {
 
 	defer resp.Body.Close()
 
+	fileName := getFileName()
+	fmt.Println(fileName)
+
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		panic(err)
 	}
 
-	err = ioutil.WriteFile("out/words3.txt", body, 0777)
+	if len(body) > MAX_BYTES {
+		// 压缩
+		gzipCompress(fileName, body)
+
+	} else {
+		err = ioutil.WriteFile("out/"+fileName, body, 0777)
+		if err != nil {
+			panic(err)
+		}
+	}
+	
+}
+
+// 从url中获取文件名
+func getFileName() string {
+	s := strings.Split(url, "/")
+	len := len(s)
+	return s[len-1]
+}
+
+// gzip 压缩
+func gzipCompress(fileName string, data []byte) {
+	fw, err := os.Create("out/"+fileName+".gz")
 	if err != nil {
 		panic(err)
 	}
+
+	zw := gzip.NewWriter(fw)
+
+	defer zw.Close()
+
+	_, err = zw.Write(data)
+	if err != nil {
+		panic(err)
+	}
+
+	// if err := zw.Close(); err != nil {
+	// 	panic(err)
+	// }
+
 }
