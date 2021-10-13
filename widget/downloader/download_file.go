@@ -57,18 +57,14 @@ func gzipCompress(fileName string, data []byte) {
 	if err != nil {
 		panic(err)
 	}
+	defer fw.Close()
 
 	zw := gzip.NewWriter(fw)
-
 	defer zw.Close()
 
 	_, err = zw.Write(data)
 	if err != nil {
 		panic(err)
 	}
-
-	// if err := zw.Close(); err != nil {
-	// 	panic(err)
-	// }
 
 }
