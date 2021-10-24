@@ -4,13 +4,15 @@
 设置代理，命令窗口下执行：
 ```
 go env -w GOPROXY=https://goproxy.cn,direct
-go env -w GOSUMDB="sum.golang.google.cn" #不确定这个是否必要，我都改了
+# 经新环境验证，这句确实没必要
+# 但加了也不影响
+go env -w GOSUMDB="sum.golang.google.cn" #不确定这个是否必要
 ```
 
 可通过`go env`查看当前的值。
 
 ## Q1: VSCode中如何运行Go程序？
-Extensions，搜索并安装 **Code Runner** 插件。
+Extensions，搜索并安装 **Code Runner** 插件。  
 有时候会失败，如`os.Open()`无法读取其他文件。这时还要用原始的命令行。
 
 ## Q2: 错误提示：... cannot find main module ...
