@@ -6,4 +6,5 @@
 - `example_test.go`中的 `import` 不要用 `.`，因为在实际使用中也是`package.Func`。`xxx_test.go`中可以使用，因为它是包内的测试类
 - 要习惯用工厂方法`package.NewXXX()`。`package.XXX{}`，不合适也不好看
 - 常量不用全大写，也不用下划线，`const MaxSize = 100`就可以，小写也行，源码就这么写的`const startBufSize = 4096`
+- 测试类（包括example），文件名都以`_test.go`结尾，包名以`_test`结尾
 - 
