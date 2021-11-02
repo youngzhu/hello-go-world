@@ -9,12 +9,18 @@ import (
 	"os"
 )
 
-const MAX_BYTES int = 100 // 文件是否压缩的阈值
+const MAX_BYTES int = 10000 // 文件是否压缩的阈值
 
-var url = "https://algs4.cs.princeton.edu/21elementary/words3.txt"
+var url = "https://algs4.cs.princeton.edu/24pq/tiny.txt"
+
+
+// var url = "https://algs4.cs.princeton.edu/21elementary/words3.txt"
+// var url = "https://algs4.cs.princeton.edu/31elementary/tinyTale.txt"
+// var url = "https://algs4.cs.princeton.edu/31elementary/tale.txt"
+// var url = "https://algs4.cs.princeton.edu/31elementary/leipzig100K.txt"
 
 // 从指定url下载文件
-// 如果文件大于1000行，则压缩
+// 如果文件大于设定值，则压缩
 func main() {
 	resp, err := http.Get(url)
 	if err != nil {
