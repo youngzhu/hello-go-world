@@ -15,6 +15,13 @@ func main() {
 	fmt.Println("after...")
 	fmt.Println("array:", array)
 	fmt.Println("slice:", slice)
+
+	// Output:
+	// array: [1 2 3]
+	// slice: [11 22 33]
+	// after...
+	// array: [1 2 3]
+	// slice: [-11 22 33]
 }
 
 func funcArray(a [3]int) {
