@@ -20,3 +20,6 @@ func isShellSpecialVar(c uint8) bool {
     return false
 }
 ```
+
+## 004 数组和切片作为参数在方法之间传递：数组是值（副本）传递，切片是指针（引用）传递
+可参见：/book1/ch02/array_vs_slice.go
