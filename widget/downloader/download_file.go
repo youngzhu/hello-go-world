@@ -11,7 +11,9 @@ import (
 
 const MAX_BYTES int = 10000 // 文件是否压缩的阈值
 
-var url = "https://algs4.cs.princeton.edu/24pq/tiny.txt"
+var url = "https://algs4.cs.princeton.edu/13stacks/tobe.txt"
+
+// var url = "https://algs4.cs.princeton.edu/24pq/tiny.txt"
 
 
 // var url = "https://algs4.cs.princeton.edu/21elementary/words3.txt"
