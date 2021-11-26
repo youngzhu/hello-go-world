@@ -1,7 +1,7 @@
 package main
 
 import "fmt"
-var newAlg string = "Quick"
+var newAlg string = "Heap"
 var otherAlgs []string
 
 func init() {
@@ -9,7 +9,7 @@ func init() {
 	otherAlgs = append(otherAlgs, "Insertion")
 	otherAlgs = append(otherAlgs, "Shell")
 	otherAlgs = append(otherAlgs, "Merge")
-	// append(otherAlgs, "")
+	otherAlgs = append(otherAlgs, "Quick")
 	// append(otherAlgs, "")
 	// append(otherAlgs, "")
 	// append(otherAlgs, "")

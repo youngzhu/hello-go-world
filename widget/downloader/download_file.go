@@ -11,15 +11,27 @@ import (
 
 const MAX_BYTES int = 10000 // 文件是否压缩的阈值
 
-var url = "https://algs4.cs.princeton.edu/13stacks/tobe.txt"
-
-// var url = "https://algs4.cs.princeton.edu/24pq/tiny.txt"
+// var url = "https://algs4.cs.princeton.edu/13stacks/tobe.txt"
+// var url = "https://algs4.cs.princeton.edu/14analysis/1Kints.txt"
+// var url = "https://algs4.cs.princeton.edu/14analysis/2Kints.txt"
+// var url = "https://algs4.cs.princeton.edu/14analysis/4Kints.txt"
 
 
 // var url = "https://algs4.cs.princeton.edu/21elementary/words3.txt"
+// var url = "https://algs4.cs.princeton.edu/24pq/tiny.txt"
+// var url = "https://algs4.cs.princeton.edu/24pq/m1.txt"
+// var url = "https://algs4.cs.princeton.edu/24pq/m2.txt"
+// var url = "https://algs4.cs.princeton.edu/24pq/m3.txt"
+
 // var url = "https://algs4.cs.princeton.edu/31elementary/tinyTale.txt"
 // var url = "https://algs4.cs.princeton.edu/31elementary/tale.txt"
 // var url = "https://algs4.cs.princeton.edu/31elementary/leipzig100K.txt"
+
+// var url = "https://algs4.cs.princeton.edu/41graph/tinyG.txt"
+// var url = "https://algs4.cs.princeton.edu/41graph/tinyCG.txt"
+// var url = "https://algs4.cs.princeton.edu/41graph/routes.txt"
+// var url = "https://algs4.cs.princeton.edu/41graph/movies.txt"
+var url = "https://algs4.cs.princeton.edu/42digraph/tinyDG.txt"
 
 // 从指定url下载文件
 // 如果文件大于设定值，则压缩
