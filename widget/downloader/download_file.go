@@ -31,7 +31,10 @@ const MAX_BYTES int = 10000 // 文件是否压缩的阈值
 // var url = "https://algs4.cs.princeton.edu/41graph/tinyCG.txt"
 // var url = "https://algs4.cs.princeton.edu/41graph/routes.txt"
 // var url = "https://algs4.cs.princeton.edu/41graph/movies.txt"
-var url = "https://algs4.cs.princeton.edu/42digraph/tinyDG.txt"
+// var url = "https://algs4.cs.princeton.edu/42digraph/tinyDG.txt"
+// var url = "https://algs4.cs.princeton.edu/42digraph/tinyDAG.txt"
+var url = "https://algs4.cs.princeton.edu/42digraph/mediumDG.txt"
+
 
 // 从指定url下载文件
 // 如果文件大于设定值，则压缩
