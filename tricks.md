@@ -36,3 +36,10 @@ go run sort_compare.go -a1 insertion -a2 selection -n 1000 -t 100
 2. `strconv.FormatInt(number, 10)`
 3. `strconv.Itoa(number)`
 通过基准测试，效率排名为：2-3-1
+
+## 006 example_test时，空格不要写在末尾
+```go
+fmt.Printf(" %v", v) // pass
+
+fmt.Printf("%v ", v) // fail
+```
