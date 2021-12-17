@@ -23,3 +23,12 @@ func isShellSpecialVar(c uint8) bool {
 
 ## 004 数组和切片作为参数在方法之间传递：数组是值（副本）传递，切片是指针（引用）传递
 可参见：/book1/ch02/array_vs_slice.go
+
+## 005 初始化二维数组/切片
+```Go
+m, n := 3, 4
+a := make([][]int, m) // 二维切片，3行
+for i := range a {
+    a[i] = make([]int, n) // 每一行4列
+}
+```
