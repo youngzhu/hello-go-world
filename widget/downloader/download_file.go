@@ -15,6 +15,7 @@ const MAX_BYTES int = 10000 // 文件是否压缩的阈值
 // var url = "https://algs4.cs.princeton.edu/14analysis/1Kints.txt"
 // var url = "https://algs4.cs.princeton.edu/14analysis/2Kints.txt"
 // var url = "https://algs4.cs.princeton.edu/14analysis/4Kints.txt"
+// var url = "https://algs4.cs.princeton.edu/15uf/mediumUF.txt"
 
 
 // var url = "https://algs4.cs.princeton.edu/21elementary/words3.txt"
@@ -33,7 +34,15 @@ const MAX_BYTES int = 10000 // 文件是否压缩的阈值
 // var url = "https://algs4.cs.princeton.edu/41graph/movies.txt"
 // var url = "https://algs4.cs.princeton.edu/42digraph/tinyDG.txt"
 // var url = "https://algs4.cs.princeton.edu/42digraph/tinyDAG.txt"
-var url = "https://algs4.cs.princeton.edu/42digraph/mediumDG.txt"
+// var url = "https://algs4.cs.princeton.edu/42digraph/mediumDG.txt"
+// var url = "https://algs4.cs.princeton.edu/43mst/tinyEWG.txt"
+// var url = "https://algs4.cs.princeton.edu/43mst/mediumEWG.txt"
+// var url = "https://algs4.cs.princeton.edu/44sp/tinyEWD.txt"
+// var url = "https://algs4.cs.princeton.edu/44sp/tinyEWDAG.txt"
+// var url = "https://algs4.cs.princeton.edu/44sp/jobsPC.txt"
+// var url = "https://algs4.cs.princeton.edu/44sp/tinyEWDn.txt"
+// var url = "https://algs4.cs.princeton.edu/44sp/tinyEWDnc.txt"
+var url = "https://algs4.cs.princeton.edu/44sp/rates.txt"
 
 
 // 从指定url下载文件
