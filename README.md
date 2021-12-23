@@ -10,6 +10,8 @@ Go学习从这里开始
     设置代理（env）。可解决下载module需要翻墙的的问题。
 - https://studygolang.com/articles/25129
     go mod 详解
+- https://studygolang.com/articles/14183
+    fmt 格式化占位符说明
  
 ## 快问快答
 详见 [Q&A.md](Q&A.md)
