@@ -7,4 +7,10 @@ func main() {
 	for _, v := range s {
 		fmt.Println(v)
 	}
+
+	fmt.Println("=================")
+	
+	for v := range s {
+		fmt.Println(v)
+	}
 }
