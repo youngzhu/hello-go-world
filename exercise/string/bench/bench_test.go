@@ -13,6 +13,11 @@ import (
 但如果有其他数据类型（如int），因为用Sprintf，两者差别不大
 */
 
+/*
+结论：
+如果是纯字符串，就用 WriteString
+如果有其他类型的值，就用 fmt.Fprintf(&sb, "%s", val)
+*/
 
 // 字符串拼接
 var base = "TeST"
