@@ -23,6 +23,8 @@ const MAX_BYTES int = 10000 // 文件是否压缩的阈值
 // var url = "https://algs4.cs.princeton.edu/24pq/m1.txt"
 // var url = "https://algs4.cs.princeton.edu/24pq/m2.txt"
 // var url = "https://algs4.cs.princeton.edu/24pq/m3.txt"
+// var url = "https://algs4.cs.princeton.edu/25applications/domains.txt"
+var url = "https://algs4.cs.princeton.edu/25applications/california-gov.txt"
 
 // var url = "https://algs4.cs.princeton.edu/31elementary/tinyTale.txt"
 // var url = "https://algs4.cs.princeton.edu/31elementary/tale.txt"
@@ -42,7 +44,7 @@ const MAX_BYTES int = 10000 // 文件是否压缩的阈值
 // var url = "https://algs4.cs.princeton.edu/44sp/jobsPC.txt"
 // var url = "https://algs4.cs.princeton.edu/44sp/tinyEWDn.txt"
 // var url = "https://algs4.cs.princeton.edu/44sp/tinyEWDnc.txt"
-var url = "https://algs4.cs.princeton.edu/44sp/rates.txt"
+// var url = "https://algs4.cs.princeton.edu/44sp/rates.txt"
 
 
 // 从指定url下载文件
