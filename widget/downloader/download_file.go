@@ -1,12 +1,12 @@
 package main
 
 import (
-	"net/http"
-	"io/ioutil"
-	"fmt"
-	"strings"
 	"compress/gzip"
+	"fmt"
+	"io/ioutil"
+	"net/http"
 	"os"
+	"strings"
 )
 
 const MAX_BYTES int = 10000 // 文件是否压缩的阈值
@@ -17,14 +17,13 @@ const MAX_BYTES int = 10000 // 文件是否压缩的阈值
 // var url = "https://algs4.cs.princeton.edu/14analysis/4Kints.txt"
 // var url = "https://algs4.cs.princeton.edu/15uf/mediumUF.txt"
 
-
 // var url = "https://algs4.cs.princeton.edu/21elementary/words3.txt"
 // var url = "https://algs4.cs.princeton.edu/24pq/tiny.txt"
 // var url = "https://algs4.cs.princeton.edu/24pq/m1.txt"
 // var url = "https://algs4.cs.princeton.edu/24pq/m2.txt"
 // var url = "https://algs4.cs.princeton.edu/24pq/m3.txt"
 // var url = "https://algs4.cs.princeton.edu/25applications/domains.txt"
-var url = "https://algs4.cs.princeton.edu/25applications/california-gov.txt"
+//var url = "https://algs4.cs.princeton.edu/25applications/california-gov.txt"
 
 // var url = "https://algs4.cs.princeton.edu/31elementary/tinyTale.txt"
 // var url = "https://algs4.cs.princeton.edu/31elementary/tale.txt"
@@ -46,6 +45,9 @@ var url = "https://algs4.cs.princeton.edu/25applications/california-gov.txt"
 // var url = "https://algs4.cs.princeton.edu/44sp/tinyEWDnc.txt"
 // var url = "https://algs4.cs.princeton.edu/44sp/rates.txt"
 
+//var url = "https://algs4.cs.princeton.edu/63suffix/abra.txt"
+//var url = "https://algs4.cs.princeton.edu/63suffix/tinyTale.txt"
+var url = "https://algs4.cs.princeton.edu/63suffix/mobydick.txt"
 
 // 从指定url下载文件
 // 如果文件大于设定值，则压缩
@@ -75,7 +77,7 @@ func main() {
 			panic(err)
 		}
 	}
-	
+
 }
 
 // 从url中获取文件名
@@ -87,7 +89,7 @@ func getFileName() string {
 
 // gzip 压缩
 func gzipCompress(fileName string, data []byte) {
-	fw, err := os.Create("out/"+fileName+".gz")
+	fw, err := os.Create("out/" + fileName + ".gz")
 	if err != nil {
 		panic(err)
 	}

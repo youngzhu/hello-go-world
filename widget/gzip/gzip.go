@@ -1,10 +1,10 @@
 package main
 
 import (
-	"os"
-	"io"
-	"strings"
 	"compress/gzip"
+	"io"
+	"os"
+	"strings"
 )
 
 const path = "out/in.txt"
@@ -34,7 +34,7 @@ func getFileName() string {
 
 // gzip 压缩
 func gzipCompress(fileName string, data []byte) {
-	fw, err := os.Create("out/"+fileName+".gz")
+	fw, err := os.Create("out/" + fileName + ".gz")
 	if err != nil {
 		panic(err)
 	}
