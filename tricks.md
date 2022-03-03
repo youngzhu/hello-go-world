@@ -45,3 +45,6 @@ fmt.Printf(" %v", v) // pass
 
 fmt.Printf("%v ", v) // fail
 ```
+
+## 007 切片的空判断
+要检查切片是否为空，请始终使用 `len(s) == 0`。而非 `nil`
