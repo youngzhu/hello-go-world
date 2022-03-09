@@ -32,3 +32,6 @@ for i := range a {
     a[i] = make([]int, n) // 每一行4列
 }
 ```
+
+## 006 `new`和`make`的区别
+简单来说： `new` 请求分配内存，返回指针，而 `make` 只用于初始化切片，映射，channel。
