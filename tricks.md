@@ -32,6 +32,8 @@ go run sort_compare.go -a1 insertion -a2 selection -n 1000 -t 100
 ```
 
 ## 005 3种方法将整数转为字符串
+**涉及到string的转换，首先`strconv`**
+
 1. `fmt.Sprintf("%d", number)`
 2. `strconv.FormatInt(number, 10)`
 3. `strconv.Itoa(number)`
@@ -43,3 +45,6 @@ fmt.Printf(" %v", v) // pass
 
 fmt.Printf("%v ", v) // fail
 ```
+
+## 007 切片的空判断
+要检查切片是否为空，请始终使用 `len(s) == 0`。而非 `nil`
