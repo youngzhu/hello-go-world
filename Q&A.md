@@ -53,4 +53,4 @@ if condition {
 实测证明，所有文件里都能放，都有效
 
 ## Q10: 如何添加外部依赖
-`go mod tidy`
+`go mod tidy` 或者 `go get ./...`
